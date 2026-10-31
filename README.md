@@ -11,6 +11,8 @@
 
 ## 1. 核心理念：Research World
 
+> **Space 详细说明**：[Research World · Literature Space · Idea Space](docs/space.md) — 双空间架构、论文知识图谱、PaperCard 与 Idea 的证据关联、State / Intent 和 Canvas 的职责边界，以及 ASCII 流程图。
+
 我们把科研理解为在已有知识基础上持续探索、定位和突破研究边界的过程。
 
 **Research World** 是统一的研究世界，由两个紧密关联的空间构成：
