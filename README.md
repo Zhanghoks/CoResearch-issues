@@ -26,18 +26,45 @@ Idea Space 则描述用户在这个 Research World 中的探索轨迹：从哪�
 
 两个 Space 相互关联、共同演化；Idea 可以引用 Literature Space 的证据，新的探索又会扩展和修正当前掌握的文献知识。**Research World 是整体，Literature Space 与 Idea Space 是其内部两个相互作用的部分。**
 
-```mermaid
-flowchart TB
-    RW["Research World"]
-    RW --> LS["Literature Space<br/>前人研究构成的知识与关系网络"]
-    RW --> IS["Idea Space<br/>用户的研究位置与演化轨迹"]
-    LS <-->|"证据、关系、问题与方法启发"| IS
-    LS --> FR["Research Frontier<br/>当前可证据支持的研究边界"]
-    IS --> EX["探索、选择与提出候选方法"]
-    FR --> IN["Gap Finding × Cross-domain Innovation"]
-    EX --> IN
-    IN --> RV["候选 Method / Idea<br/>评审、验证与持续修订"]
-    RV --> IS
+```text
++------------------------------------------------------------------------------------------------+
+| RESEARCH WORLD                                                                                 |
+|   (a growing map of prior research + a user's evolving path)                                   |
+|                                                                                                |
+|   +----------------------------------------+     +----------------------------------------+    |
+|   | LITERATURE SPACE  [evidence graph]     |     | IDEA SPACE  [user trajectory]          |    |
+|   |                                        |     |                                        |    |
+|   | Domain -> Subfield -> Direction        |     | Idea State: focus, knowns, unknowns    |    |
+|   | Paper -> Problem -> Method             | <-> | Agenda: questions and priorities       |    |
+|   | Method -> Evaluation -> Result         |     | Intent: next uncertainty to resolve    |    |
+|   | Result -> Limitation -> Frontier       |     | Candidate Idea / Method / Proposal     |    |
+|   | Versioned sources, evidence, links     |     | Revisions and user decisions           |    |
+|   +----------------------------------------+     +----------------------------------------+    |
+|                                                                                                |
+|   Literature evidence informs Idea State; research adds and revises links.                     |
+|                                                                                                |
+|   +----------------------------------------------------------------------------------------+   |
+|   | USER-GUIDED RESEARCH LOOP                                                              |   |
+|   |                                                                                        |   |
+|   | Seed / User Goal                                                                       |   |
+|   |    |                                                                                   |   |
+|   |    v                                                                                   |   |
+|   | EXPLORE -> locate Domain / Subfield / Research Direction                               |   |
+|   |    |                                                                                   |   |
+|   |    v                                                                                   |   |
+|   | DEEP DIVE / DEEP RESEARCH -> history, methods, evaluation, limitations                 |   |
+|   |    |                                                                                   |   |
+|   |    v                                                                                   |   |
+|   | Grounded Frontier -> Gap Finder + Innovator -> Method Synthesis                        |   |
+|   |    |                                                                                   |   |
+|   |    v                                                                                   |   |
+|   | Reviewer -> Candidate Method -> Idea State Revision / Proposal                         |   |
+|   |    |                                                                                   |   |
+|   |    +--> Next Intent --(user authorizes)--> Next Research Action --+                    |   |
+|   |    ^                                                            |                      |   |
+|   |    +------------------------------------------------------------+                      |   |
+|   +----------------------------------------------------------------------------------------+   |
++------------------------------------------------------------------------------------------------+
 ```
 
 > Research World 并不意味着系统已经完整收录全部人类研究。它应随着检索、阅读和研究反馈逐步构建；“未检索到”不能直接等同于“前人未研究”。
@@ -88,18 +115,48 @@ Deep Dive 和 Deep Research 是面向用户的研究活动，不是必须按顺�
 
 例如，在某个目标方向发现现有方法无法有效处理特定类型的状态变化后，Innovator 可以进一步检索其他领域处理类似变化的机制，再分析其迁移条件和可能失败的原因。这样的组合仍然只是**候选研究方案**，必须经过近邻工作核查与实验验证，才能主张真正的边界突破。
 
-```mermaid
-flowchart LR
-    D["目标细分方向"] --> GF["Gap Finder<br/>识别已有方法的具体缺陷"]
-    D --> IV["Innovator<br/>跨领域搜索可迁移机制"]
-    GF --> G["Grounded Gap"]
-    IV --> M["Transferable Mechanism"]
-    G --> S["Method Synthesis"]
-    M --> S
-    S --> R["Reviewer<br/>新颖性、可行性与反证"]
-    R --> P["Candidate Research Proposal"]
-    R -. "证据不足时返回探索" .-> GF
-    R -. "迁移前提不成立时重选机制" .-> IV
+```text
+         +----------------------------------------------------------------+
+         | RESEARCH LEAD / ORCHESTRATOR                                   |
+         | Idea State + goal + selected Direction                         |
+         | Choose Intent; dispatch bounded research                       |
+         +----------------------------------------------------------------+
+                                         |
+                                         v
+                    +------------------+-------------------+
+                    |                                      |
+                    v                                      v
+ +-------------------------------------+    +-------------------------------------+
+ | GAP FINDER                          |    | INNOVATOR                           |
+ | Within target research domain       |    | Cross-domain analogous challenges   |
+ | Output: evidence-grounded Gap       |    | Output: transferable mechanism      |
+ +-------------------------------------+    +-------------------------------------+
+                    |                                      |
+                    +------------------+-------------------+
+                                         |
+                                         v
+                +--------------------------------------------------+
+                | METHOD SYNTHESIS                                 |
+                | Gap + mechanism -> candidate approach            |
+                +--------------------------------------------------+
+                                         |
+                                         v
+                +--------------------------------------------------+
+                | REVIEWER                                         |
+                | Check prior art, transfer assumptions,           |
+                | feasibility and falsifiable evaluation           |
+                +--------------------------------------------------+
+                                         |
+                                         v
+       +------------------------------+-----------------------------+
+       |                                                            |
+       v                                                            v
+  [NEED MORE EVIDENCE]                                [CANDIDATE METHOD / IDEA]
+       |                                                            |
+       v                                                            v
+  [NEW INTENT / ACTION]                               [STATE REVISION / PROPOSAL]
+       |                                                            |
+       +---(user authorizes)--> Revisit research          (user reviews core edits)
 ```
 
 ### Idea Iteration：持续修订，而不是一次性生成 Idea
@@ -114,18 +171,42 @@ CoResearch 的目标不是把 Deep Research 的终点设为一篇静态报告，
 抽象上，整个过程是一个由证据反馈驱动的循环：
 
 ```text
-Research World
-    ↓
-Explore → 定位研究方向
-    ↓
-Deep Dive / Deep Research → 逼近 Frontier
-    ↓
-Gap Finder + Innovator → 构造候选突破路径
-    ↓
-Review + Method Synthesis → 形成可验证的研究构想
-    ↓
-更新 Idea State → 推荐下一 Research Intent
-    ↺ 用户决定是否继续探索、转向或修订
+[SEED / EXISTING IDEA]
+          |
+          v
+      [EXPLORE] ------> [SELECTED RESEARCH DIRECTION]
+                                      |
+                                      v
+                           [DEEP DIVE / DEEP RESEARCH]
+                                      |
+                                      v
+                             [GROUNDED FRONTIER]
+                                      |
+                          +-----------+-----------+
+                          |                       |
+                          v                       v
+                     [GAP FINDER]            [INNOVATOR]
+                          |                       |
+                          +-----------+-----------+
+                                      |
+                                      v
+                        [METHOD SYNTHESIS + REVIEW]
+                                      |
+                                      v
+                    [CANDIDATE IDEA / METHOD / EVALUATION]
+                                      |
+                                      v
+                   [IDEA STATE REVISION OR PENDING PROPOSAL]
+                                      |
+                                      v
+                             [NEXT RESEARCH INTENT]
+                                      |
+                           (explicit user authorization)
+                                      |
+                                      v
+                              [NEXT RESEARCH ACTION]
+                                      |
+                                      +----> new evidence ----> [IDEA STATE]
 ```
 
 这一过程类似在复杂知识空间中进行**自适应导航与局部优化**，但不是具有固定目标函数的真正梯度下降：研究者可以改变假设、探索未知区域，甚至重新选择目标领域。
