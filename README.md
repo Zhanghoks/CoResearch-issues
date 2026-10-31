@@ -71,6 +71,12 @@ Idea Space 则描述用户在这个 Research World 中的探索轨迹：从哪�
 
 ## 2. 用户研究工作流
 
+> **研究动作详细设计**：
+> - [Explore：从兴趣逐层定位细分研究方向](docs/actions/01-explore.md)
+> - [Deep Dive / Deep Research：研究发展脉络、识别 Frontier 与探索突破方法](docs/actions/02-deep-dive-deep-research.md)
+>
+> 两份文档区分用户操作、Research Lead 与子任务职责、研究产物、Idea State 更新和下一轮 Intent，并以 ASCII 流程图展示设计。涉及 Gap Finder、Innovator 等角色的内容是目标机制，不应直接视为公开版本中已全部实现。
+
 ### Explore：从宽泛兴趣定位到细分研究方向
 
 用户可以从一个宽泛的 Seed、初步问题、一篇论文或已有 Idea 开始，不必预先写好完整的研究计划。
