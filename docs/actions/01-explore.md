@@ -198,6 +198,8 @@ Explore 同时可以影响 **Literature Space** 和 **Idea Space**，但不同�
 
 **重要区分**：Explore 找到了一个有价值的方向，并不表示用户已经正式改变 Research Focus。即使用户当前没有关联长期 Idea，也可以得到方向与论文研究结果，而不会隐式创建一个新的长期研究主体。
 
+若已经关联 Idea，有证据的新认识、未知和候选定位可以在 Explore 执行过程中写入同一个 Idea State，不必等本轮回执才第一次出现。正在检索或阅读，先作为执行进度展示。只有认识、未知或判断实际变化时，才形成正式 State 增量。原则见 [Idea State：实时演化的研究状态](../space.md#live-idea-state)。
+
 ## 6. 研究完成后的结果卡
 
 一张 Explore 结果回执应当清楚展示：
@@ -230,7 +232,7 @@ Explore 同时可以影响 **Literature Space** 和 **Idea Space**，但不同�
 3. 用户可以沿其中一个 Direction 再展开一层，之前的选择和证据仍可回看。
 4. Paper、Direction 与当前 Idea 之间有明确来源关联。
 5. 查看 Direction 不会自动改变当前 Focus；真正采纳时有独立用户操作。
-6. 本轮发现的有效认知可以推进 Idea State；没有关联 Idea 时不伪称已更新。
+6. 本轮发现的有效认知可以在执行过程中推进同一个 Idea State；没有关联 Idea 时不伪称已更新。检索进度本身不构成 State 版本。
 7. 下一步 Intent 是可解释的建议，不会未经授权执行。
 
 ---

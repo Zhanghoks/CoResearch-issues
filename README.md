@@ -11,7 +11,7 @@
 
 ## 1. 核心理念：Research World
 
-> **Space 详细说明**：[Research World · Literature Space · Idea Space](docs/space.md) — 双空间架构、论文知识图谱、PaperCard 与 Idea 的证据关联、State / Intent 和 Canvas 的职责边界，以及 ASCII 流程图。
+> **Space 详细说明**：[Research World · Literature Space · Idea Space](docs/space.md) — 双空间架构、论文知识图谱、PaperCard 与 Idea 的证据关联、[实时演化的 Idea State](docs/space.md#live-idea-state)、Intent 和 Canvas 的职责边界，以及 ASCII 流程图。
 
 我们把科研理解为在已有知识基础上持续探索、定位和突破研究边界的过程。
 
@@ -20,7 +20,7 @@
 | 空间 | 回答的问题 | 主要内容 |
 | --- | --- | --- |
 | **Literature Space**（文献空间） | 前人研究了什么？知识发展到了哪里？ | 领域、子方向、论文、Problem、Method、Evaluation、Result、Limitation、研究间的关系与证据 |
-| **Idea Space**（想法空间） | 当前用户在研究什么？下一步如何推进？ | 用户的研究兴趣、当前 Idea、Idea State、Research Intent、候选方法、研究判断、反馈与修订历史 |
+| **Idea Space**（想法空间） | 当前用户在研究什么？下一步如何推进？ | 用户的研究兴趣、当前 Idea、实时演化的 Idea State、Research Intent、候选方法、研究判断、反馈与修订历史 |
 
 Literature Space 不是简单的论文文件夹，而是一个**以研究问题、方法、实验和局限为关系的知识图谱式空间**。一篇论文可能关联多个问题，一个方法也可能在多个领域之间迁移。图谱中的关系应当能够追溯到真实文献和证据。
 
@@ -43,7 +43,7 @@ Idea Space 则描述用户在这个 Research World 中的探索轨迹：从哪�
 |   | Versioned sources, evidence, links     |     | Revisions and user decisions           |    |
 |   +----------------------------------------+     +----------------------------------------+    |
 |                                                                                                |
-|   Literature evidence informs Idea State; research adds and revises links.                     |
+|   Meaningful evidence updates the same Idea State while research is still running.            |
 |                                                                                                |
 |   +----------------------------------------------------------------------------------------+   |
 |   | USER-GUIDED RESEARCH LOOP                                                              |   |
@@ -167,59 +167,49 @@ Deep Dive 和 Deep Research 是面向用户的研究活动，不是必须按顺�
        +---(user authorizes)--> Revisit research          (user reviews core edits)
 ```
 
-### Idea Iteration：持续修订，而不是一次性生成 Idea
+### Idea Iteration：State 在研究进行中持续演化
 
-CoResearch 的目标不是把 Deep Research 的终点设为一篇静态报告，而是让每一轮研究能够影响用户的下一步行动。
+CoResearch 的目标不是把 Deep Research 的终点设为一篇静态报告，也不是等某个 Skill 执行完毕才统一生成新的 Idea State。
 
-- **Idea State**：用户在当前研究上下文中的位置、构想、已知与未知、证据判断和待解决问题。
-- **Research Intent**：基于当前 State，下一步最值得解决的研究不确定性、选择理由以及预期完成标准。
-- **Research Action**：在用户授权下实际执行的一次 Explore、Deep Dive、Deep Research 或其他具体研究任务。
-- **Idea Revision**：研究带来实质变化时，保留修改内容、理由、证据、历史以及用户确认。
+- **Idea State**：该 Idea 的实时研究状态（Live Evolving Research State）。它包含当前 Focus、已知与未知、Frontier、Method、Evaluation 和 Agenda。有意义的新证据出现时就更新，不属于单独某一个 Skill。
+- **Research Intent**：基于最新 State，下一步最值得解决的研究不确定性、选择理由以及预期完成标准。State 变化后重新评估。
+- **Research Action**：在用户授权下实际执行的一次 Explore、Deep Dive、Deep Research 或其他具体研究任务。执行中可以产生进度和有证据的 State 增量。
+- **Idea Revision**：认识发生实质变化时，保留修改内容、理由、证据和历史。用户维护的核心 Formulation 通过直接编辑或 Proposal 确认后变化。
 
-抽象上，整个过程是一个由证据反馈驱动的循环：
+核心循环是：
+
+**Research Action → Evidence → Live State Update → Intent Re-evaluation → 下一次 Research Action。**
 
 ```text
-[SEED / EXISTING IDEA]
+[USER-AUTHORIZED RESEARCH ACTION]
+ Explore / Deep Dive / Deep Research / other actions
           |
           v
-      [EXPLORE] ------> [SELECTED RESEARCH DIRECTION]
-                                      |
-                                      v
-                           [DEEP DIVE / DEEP RESEARCH]
-                                      |
-                                      v
-                             [GROUNDED FRONTIER]
-                                      |
-                          +-----------+-----------+
-                          |                       |
-                          v                       v
-                     [GAP FINDER]            [INNOVATOR]
-                          |                       |
-                          +-----------+-----------+
-                                      |
-                                      v
-                        [METHOD SYNTHESIS + REVIEW]
-                                      |
-                                      v
-                    [CANDIDATE IDEA / METHOD / EVALUATION]
-                                      |
-                                      v
-                   [IDEA STATE REVISION OR PENDING PROPOSAL]
-                                      |
-                                      v
-                             [NEXT RESEARCH INTENT]
-                                      |
-                           (explicit user authorization)
-                                      |
-                                      v
-                              [NEXT RESEARCH ACTION]
-                                      |
-                                      +----> new evidence ----> [IDEA STATE]
+ [New paper evidence or research judgment]
+          |
+          +---- meaningful change in understanding? ----+
+          |                                              |
+          no                                             yes
+          |                                              |
+          v                                              v
+ [Live Research Progress]                 [Versioned Idea State delta]
+  searching / reading / analysis           Known, Unknown, conflict,
+                                           Frontier, Agenda
+                                                         |
+                                                         v
+                                          [Re-evaluate Research Intent]
+                                                         |
+                                          (user chooses the next Action)
+                                                         |
+                                                         v
+                                          [NEXT RESEARCH ACTION]
 ```
+
+搜索到一批论文，先记为执行进度。只有新证据改变了认识、未知或判断，才提交正式 State 增量。候选 Gap 或 Method 可以立即显示为正在核查的提案；在用户确认前，不覆盖 Focus、Hypothesis、Approach 或 Method 正文。Action 结束时仍保存本轮 Receipt 和建议的 Next Intent。
 
 这一过程类似在复杂知识空间中进行**自适应导航与局部优化**，但不是具有固定目标函数的真正梯度下降：研究者可以改变假设、探索未知区域，甚至重新选择目标领域。
 
-Agent 可以协助检索、分析、归纳、提出候选方案并记录新认识；**研究方向的关键取舍和核心 Idea 内容修改由用户掌控**。新证据应挑战或修正已有判断，而不是悄悄覆盖历史。下一步 Intent 是建议，不意味着系统自动执行下一轮研究。
+Agent 可以协助检索、分析、归纳、提出候选方案并记录新认识；**研究方向的关键取舍和核心 Idea 内容修改由用户掌控**。新证据应挑战或修正已有判断，并保留可复查的历史。下一步 Intent 是建议，不意味着系统自动执行下一轮研究。完整定义见 [Idea State：实时演化的研究状态](docs/space.md#live-idea-state)。
 
 ## 3. 我们希望坚持的原则
 
@@ -227,7 +217,7 @@ Agent 可以协助检索、分析、归纳、提出候选方案并记录新认�
 2. **站在前人研究之上**：每个重要判断尽可能连接到真实论文、实验条件和可追溯证据。
 3. **从 Gap 走向 Method**：不仅发现尚未解决的问题，还探索解决机制及其跨领域迁移可能性。
 4. **保持批判性**：区分论文陈述、Agent 推断和用户假设；不把检索缺失误判为研究空白，也不把候选方法当作已验证突破。
-5. **持续演化**：保留 Idea State、Research Intent、文献关系、用户反馈和修订历史，让长期研究能够延续。
+5. **持续演化**：Idea State 随有意义的新证据实时更新，并保留 Research Intent、文献关系、用户反馈和修订历史。执行进度不等于新的 State 版本；核心构想仍由研究者确认。
 6. **人机协作，而非替代研究者**：由 Agent 承担大量信息收集与结构化工作，由研究者决定目标、判断价值并验证科学贡献。
 
 ## 4. Community：问题反馈与功能讨论

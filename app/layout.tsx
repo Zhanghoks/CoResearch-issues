@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Albert_Sans } from "next/font/google";
+import { SiteHeader } from "./components/site-header";
 import "./globals.css";
 
 const albert = Albert_Sans({
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             'var(--font-albert), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif',
         }}
       >
+        <SiteHeader />
         {children}
       </body>
     </html>

@@ -1,7 +1,26 @@
+export const githubUrl = "https://github.com/Zhanghoks/CoResearch-Community";
 export const issuesUrl = "https://github.com/Zhanghoks/CoResearch-Community/issues";
 export const newIssueUrl = "https://github.com/Zhanghoks/CoResearch-Community/issues/new";
 export const spaceDocUrl =
   "https://github.com/Zhanghoks/CoResearch-Community/blob/main/docs/space.md";
+
+export const docs = [
+  {
+    title: "Research World · Literature Space · Idea Space",
+    body: "双空间怎么分工，以及 Idea State 如何在研究进行中实时演化。",
+    href: spaceDocUrl,
+  },
+  {
+    title: "Explore",
+    body: "从模糊兴趣逐层定位到 Domain、Subfield 和更具体的研究方向。",
+    href: "https://github.com/Zhanghoks/CoResearch-Community/blob/main/docs/actions/01-explore.md",
+  },
+  {
+    title: "Deep Dive / Deep Research",
+    body: "进入细分方向后，如何梳理脉络、识别 Frontier，并探索可验证的突破方法。",
+    href: "https://github.com/Zhanghoks/CoResearch-Community/blob/main/docs/actions/02-deep-dive-deep-research.md",
+  },
+] as const;
 
 export const steps = [
   {
@@ -29,8 +48,8 @@ export const steps = [
     id: "revision",
     index: "04",
     title: "Revision",
-    summary: "由你确认下一步",
-    body: "研究带来的判断写入 Idea State。下一步 Intent 只是建议，关键取舍和核心修改由研究者决定。",
+    summary: "State 随证据演化",
+    body: "Idea State 随着新证据持续更新，不必等一轮研究结束。下一步 Intent 根据最新状态提出建议；Focus 和核心构想仍由研究者确认。",
   },
 ] as const;
 
@@ -45,13 +64,13 @@ export const spaces = [
     id: "idea",
     title: "Idea Space",
     question: "你正在研究什么？",
-    body: "记录当前兴趣、已知与未知、研究判断和修订历史。Idea 可以引用文献证据，新的探索也会修正已经掌握的知识。",
+    body: "Idea State 记录当前焦点、已知与未知、Frontier 判断和修订历史，并随有意义的新证据更新。核心构想由你确认后才改变。",
   },
   {
     id: "loop",
     title: "Research Loop",
     question: "下一步做什么？",
-    body: "从 Seed 到 Explore，再到 Deep Research 和候选方法。每一轮都保留理由、证据和用户确认，而不是覆盖掉历史。",
+    body: "一次研究动作带来证据，证据更新 Idea State，最新状态再形成下一步建议。历史保留下来，下一轮仍由你授权。",
   },
 ] as const;
 
@@ -79,7 +98,7 @@ export const principles = [
   "重要判断尽量连到真实论文、实验条件和可追溯证据。",
   "不只指出 Gap，也探索可能的机制与跨领域迁移。",
   "区分论文陈述、Agent 推断和用户假设。",
-  "保留 State、Intent、反馈和修订历史。",
+  "Idea State 随有意义的新证据实时演化，并保留 Intent、反馈和修订历史。",
   "Agent 整理信息，研究者决定目标并验证贡献。",
 ] as const;
 
@@ -98,7 +117,7 @@ export const faqs = [
   },
   {
     q: "Agent 会替我决定研究方向吗？",
-    a: "不会。Agent 可以协助检索、分析和提出候选方案。研究方向的关键取舍，以及核心 Idea 的修改，由研究者掌控。下一步 Intent 需要你授权后才会变成实际研究动作。",
+    a: "不会。Agent 可以在研究过程中更新有证据的认识，并实时提出候选判断。已确认的 Focus、Hypothesis 和 Method 仍由你决定。下一步 Intent 需要你授权后才会变成实际研究动作。",
   },
   {
     q: "如何反馈问题或建议？",

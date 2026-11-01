@@ -285,8 +285,8 @@ Reviewer 的工作不仅是挑错，还要判断下一步应该**验证 Gap、�
 3. **寻找并读取证据**：按需并行检索相近方法、反例、实验、历史转折及新的工作；无法阅读的材料要明确标记。
 4. **执行适合当前动作的分析**：Deep Dive 侧重具体机制对照；Deep Research 侧重方向综合；有明确创新需求时进一步分析 Gap 和跨领域机制。
 5. **审查结果**：区分论文原话、交叉推断、用户假设与仍有争议的结论；对于无法回答的问题留下 Unknown。
-6. **解释对 Idea 的影响**：由 Research Lead 判断哪些认识可以增加、哪些核心判断需要复查、哪些 Section 应维持或提 Proposal。
-7. **交付并停止**：保存合规的材料与阶段成果，展示下一步 Intent；**不自动连续启动新 Action**。
+6. **解释对 Idea 的影响**：每当出现有意义的新信息，Research Lead 重新评估当前 State。有证据的认识、未知、冲突和 Frontier 判断可以在本轮执行中增量提交；核心 Section 的正文修改仍只提出 Proposal。
+7. **交付并停止**：保存合规的材料、本轮 Receipt 和建议的 Next Intent；**不自动连续启动新 Action**。State 在结束前就已经可以随证据演化，结束回执不是第一次允许更新 State 的时刻。
 
 ~~~text
 [User-authorized Research Action]
@@ -305,34 +305,37 @@ Reviewer 的工作不仅是挑错，还要判断下一步应该**验证 Gap、�
            +--------+-------+
                     |
                     v
-        [Comparative analysis]
-        Deep Dive / Deep Research
+     [Lead re-evaluates current State]
                     |
-                    v
-       [Frontier / Gap assessment]
-                    |
-           [If justified by task]
-                    |
-                    v
-      [Transfer / Method candidate]
-                    |
-                    v
-       [Lead interpretation]
-                    |
-                    v
- [Evidence + State update + Proposal]
-                    |
-                    v
-       [Next Intent suggestion]
-                    |
-             (user decides)
+        meaningful change in understanding?
+           |                         |
+          no                        yes
+           |                         |
+           v                         v
+ [Live progress only]      [Commit State delta]
+                                   |
+                                   v
+                         [Refresh candidate Intent]
+                                   |
+                                   v
+        [Continue analysis if needed]
+        comparison / frontier / method
+                                   |
+                    (repeat while this Action runs)
+                                   |
+                                   v
+              [Final receipt + Next Intent]
+                                   |
+                            (user decides)
 ~~~
+
+正在搜索或阅读一批论文，先表现为执行进度。两个方法冲突、某项限制得到证据、原边界判断被新论文挑战，才写入 Idea State。候选 Gap 可以显示为“正在核查最近邻方法”；在核查完成前，不把它写成已确认的科研创新。详见 [Idea State：实时演化的研究状态](../space.md#live-idea-state)。
 
 不是每轮都要完整执行到 Method Synthesis。若当前证据还不足以确认 Frontier，合理交付可以是“当前边界判断尚不充分，建议下一轮检验某项关键条件”。
 
 ## 6. Idea State、Intent 与用户决策
 
-研究不会自动改写用户已经确认的核心 Hypothesis、Approach 或 Focus。
+Deep Dive 与 Deep Research 都围绕同一个 Idea State 工作，不各自生成一份到结束才可见的 State。研究进行中可以提交有证据的认识增量。研究不会自动改写用户已经确认的核心 Hypothesis、Approach 或 Focus。
 
 | 研究中发生的事 | 正确的 State 行为 |
 | --- | --- |
