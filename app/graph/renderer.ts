@@ -47,7 +47,7 @@ export async function mountGraph(host: HTMLElement) {
   for (const [from, to] of graph.links) {
     edges.moveTo(graph.dots[from].x, graph.dots[from].y)
       .lineTo(graph.dots[to].x, graph.dots[to].y)
-      .stroke({ width: 0.85, color: ink, alpha: 0.19 });
+      .stroke({ width: 0.8, color: ink, alpha: 0.16 });
   }
   view.addChild(edges, nodes);
   app.stage.addChild(view);

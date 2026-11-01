@@ -3,7 +3,7 @@
 当前页面显示静态、完整圆形图谱；尚未启用 pin 或滚动分镜，等待叙事内容确定。
 背景始终透明，使用整页底色。
 
-- `app/graph/graph-layout.ts`：固定种子、250 个稳定节点 ID，全部在半径 320 的同一圆盘内，连接骨架保证没有分离的岛。
+- `app/graph/graph-layout.ts`：固定种子，350 个核心节点在半径 205 内密集交织，18 条弯曲分支向四周逐渐疏散，全部在半径 320 的同一圆盘内。连接骨架保证没有分离的岛。核心保留 `paper-*` ID，外围使用 `branch-分支序号-层级` 和 `branch-分支序号-层级-leaf-序号`，方便后续分镜沿分支推进。
 - `app/graph/renderer.ts`：数据、连线层、节点层、镜头分开。`mountGraph()` 返回 `pose`、`render()`、`nodePosition(id)`、`destroy()`。节点独立绘制，支持聚焦和淡化；渲染按需执行，不持续运行布局模拟。
 - `app/graph/scroll-story.ts`：已准备可选的 GSAP ScrollTrigger 适配器，支持带名称的分镜、镜头平移/缩放/旋转、节点聚焦、节点/连线透明度、滚动倒放和 resize。系统开启减少动态效果时保留静态图谱。
 

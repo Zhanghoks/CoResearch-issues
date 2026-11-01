@@ -4,10 +4,10 @@ type Dot = Omit<GraphDot, "id">;
 
 export function buildGraph() {
   const rand = mulberry32(20261101);
-  const dots = placeDisk(rand, 250, 0, 0, 320).map((dot, index) => ({
+  const dots = placeDisk(rand, 350, 0, 0, 205).map((dot, index) => ({
     ...dot, id: `paper-${index}`,
   }));
-  const links = mesh(dots, 160);
+  const links = mesh(dots, 125);
   const seen = new Set(links.map(([a, b]) => `${a}:${b}`));
   // A nearest-parent backbone prevents detached communities without a central star.
   for (let i = 1; i < dots.length; i += 1) {
@@ -18,6 +18,55 @@ export function buildGraph() {
     }
     if (!seen.has(`${nearest}:${i}`)) links.push([nearest, i]);
   }
+
+  // Branches grow from different core anchors, rather than a single central hub.
+  // Fixed branch IDs also let future scroll scenes follow a particular frontier.
+  const coreCount = dots.length;
+  const branchCount = 18;
+  for (let branch = 0; branch < branchCount; branch += 1) {
+    const angle = (branch / branchCount) * Math.PI * 2 + (rand() - 0.5) * 0.16;
+    const reach = 275 + rand() * 45;
+    const bend = (rand() - 0.5) * 0.3;
+    const steps = 4 + Math.floor(rand() * 2);
+    const anchor = { x: Math.cos(angle) * 175, y: Math.sin(angle) * 175 };
+    let parent = 0;
+    for (let i = 1; i < coreCount; i += 1) {
+      if (Math.hypot(dots[i].x - anchor.x, dots[i].y - anchor.y) <
+          Math.hypot(dots[parent].x - anchor.x, dots[parent].y - anchor.y)) parent = i;
+    }
+
+    for (let step = 0; step < steps; step += 1) {
+      const progress = (step + 1) / steps;
+      const distance = 185 + (reach - 185) * progress;
+      const theta = angle + bend * progress * progress + (rand() - 0.5) * 0.06;
+      const index = dots.length;
+      dots.push({
+        id: `branch-${branch}-${step}`,
+        x: Math.cos(theta) * distance,
+        y: Math.sin(theta) * distance,
+        r: step === 1 ? 3.7 + rand() : 1.8 + rand() * 1.1,
+      });
+      links.push([parent, index]);
+
+      // Small lateral forks thin out towards the tips; leave open space between arms.
+      const forks = step < 2 ? 2 : rand() < 0.6 ? 1 : 0;
+      for (let fork = 0; fork < forks; fork += 1) {
+        const side = fork === 0 ? -1 : 1;
+        const forkAngle = theta + side * (0.055 + rand() * 0.075);
+        const forkRadius = Math.min(320, distance + (rand() - 0.3) * 28);
+        const leaf = dots.length;
+        dots.push({
+          id: `branch-${branch}-${step}-leaf-${fork}`,
+          x: Math.cos(forkAngle) * forkRadius,
+          y: Math.sin(forkAngle) * forkRadius,
+          r: 1.6 + rand(),
+        });
+        links.push([index, leaf]);
+        if (step === 0) links.push([parent, leaf]);
+      }
+      parent = index;
+    }
+  }
   return { dots, links };
 }
 
@@ -25,13 +74,13 @@ function placeDisk(rand: () => number, count: number, cx: number, cy: number, ra
   const golden = Math.PI * (3 - Math.sqrt(5));
   const nodes: Dot[] = [];
   for (let i = 0; i < count; i += 1) {
-    const dist = Math.min(radius, radius * Math.sqrt((i + 0.5) / count) * (0.84 + rand() * 0.32));
+    const dist = Math.min(radius, radius * Math.pow((i + 0.5) / count, 0.62) * (0.88 + rand() * 0.24));
     const theta = i * golden + (rand() - 0.5) * 0.7;
     const hub = rand() < 0.045;
     nodes.push({
       x: cx + Math.cos(theta) * dist + (rand() - 0.5) * 16,
       y: cy + Math.sin(theta) * dist + (rand() - 0.5) * 16,
-      r: hub ? 5.2 + rand() * 1.6 : 2.15 + rand() * 1.15,
+      r: hub ? 4.5 + rand() * 1.5 : 1.7 + rand() * 1.1,
     });
     const dx = nodes[i].x - cx;
     const dy = nodes[i].y - cy;
@@ -64,7 +113,7 @@ function mesh(nodes: Dot[], radius: number) {
       }))
       .filter((item) => item.otherIndex !== index && item.dist < reach && item.dist > 18)
       .sort((a, b) => a.dist - b.dist);
-    const spokes = 22;
+    const spokes = 18;
     const step = Math.max(1, Math.floor(order.length / spokes));
     for (let n = 0; n < order.length && n / step < spokes; n += step) add(index, order[n].otherIndex);
   });
