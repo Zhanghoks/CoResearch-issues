@@ -1,0 +1,1098 @@
+{
+  "regions": [
+    {
+      "id": "region-core",
+      "label": "核心区域",
+      "kind": "core",
+      "scopeId": "dir-video-gen",
+      "pathD": "M330 390C290 500 320 680 470 760C640 840 760 740 750 560C740 380 640 250 490 250C390 250 350 310 330 390Z"
+    },
+    {
+      "id": "region-frontier",
+      "label": "研究前沿",
+      "kind": "frontier",
+      "scopeId": "dir-multishot",
+      "pathD": "M660 260C780 200 980 230 1040 340C1090 440 1020 560 900 600C760 650 660 540 650 400C644 320 620 280 660 260Z"
+    },
+    {
+      "id": "region-margin",
+      "label": "边缘区域",
+      "kind": "margin",
+      "scopeId": "gap-long",
+      "pathD": "M980 300C1120 240 1280 300 1320 450C1360 620 1240 760 1100 770C980 778 920 660 940 500C954 380 920 330 980 300Z"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "dir-video-gen",
+      "kind": "direction",
+      "x": 500,
+      "y": 442,
+      "shortLabel": "视频生成",
+      "communityIds": [
+        "vision",
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "dir-consistency",
+      "kind": "direction",
+      "x": 740,
+      "y": 477,
+      "shortLabel": "生成一致性",
+      "communityIds": [
+        "vision",
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "dir-multishot",
+      "kind": "direction",
+      "x": 860,
+      "y": 425,
+      "shortLabel": "跨镜头身份一致性",
+      "communityIds": [
+        "vision",
+        "generation",
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "idea-current",
+      "kind": "idea",
+      "x": 910,
+      "y": 495,
+      "shortLabel": "当前 Idea",
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "problem-consistency",
+      "kind": "problem",
+      "x": 640,
+      "y": 582,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "problem-identity",
+      "kind": "problem",
+      "x": 820,
+      "y": 652,
+      "communityIds": [
+        "identity",
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "problem-open",
+      "kind": "problem",
+      "x": 1100,
+      "y": 547,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "paper-survey",
+      "kind": "paper",
+      "x": 470,
+      "y": 337,
+      "communityIds": [
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-attn",
+      "kind": "paper",
+      "x": 540,
+      "y": 285,
+      "communityIds": [
+        "vision",
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-base",
+      "kind": "paper",
+      "x": 430,
+      "y": 512,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-eval",
+      "kind": "paper",
+      "x": 520,
+      "y": 582,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-follow",
+      "kind": "paper",
+      "x": 600,
+      "y": 477,
+      "communityIds": [
+        "generation",
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-limit",
+      "kind": "paper",
+      "x": 480,
+      "y": 722,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-id-a",
+      "kind": "paper",
+      "x": 780,
+      "y": 302,
+      "communityIds": [
+        "identity",
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-id-b",
+      "kind": "paper",
+      "x": 840,
+      "y": 547,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-temp",
+      "kind": "paper",
+      "x": 760,
+      "y": 652,
+      "communityIds": [
+        "vision",
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-edge",
+      "kind": "paper",
+      "x": 1040,
+      "y": 407,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-neighbor",
+      "kind": "paper",
+      "x": 1000,
+      "y": 302,
+      "communityIds": [
+        "representation",
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "paper-report",
+      "kind": "paper",
+      "x": 390,
+      "y": 390,
+      "communityIds": [
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "method-attn",
+      "kind": "method",
+      "x": 610,
+      "y": 390,
+      "communityIds": [
+        "generation",
+        "representation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "method-loss",
+      "kind": "method",
+      "x": 560,
+      "y": 687,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "method-memory",
+      "kind": "method",
+      "x": 900,
+      "y": 337,
+      "communityIds": [
+        "identity",
+        "representation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "method-candidate",
+      "kind": "method",
+      "x": 1020,
+      "y": 617,
+      "shortLabel": "候选方法",
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "bench-sim",
+      "kind": "benchmark",
+      "x": 670,
+      "y": 722,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "bench-id",
+      "kind": "benchmark",
+      "x": 800,
+      "y": 425,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "gap-long",
+      "kind": "gap_candidate",
+      "x": 1120,
+      "y": 442,
+      "shortLabel": "候选缺口",
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "beyond-q1",
+      "kind": "problem",
+      "x": 1240,
+      "y": 355,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "beyond-q2",
+      "kind": "problem",
+      "x": 1300,
+      "y": 512,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": false
+    },
+    {
+      "id": "beyond-q3",
+      "kind": "direction",
+      "x": 1220,
+      "y": 687,
+      "communityIds": [
+        "vision"
+      ],
+      "verified": false
+    },
+    {
+      "id": "n01",
+      "kind": "problem",
+      "x": 400,
+      "y": 390,
+      "communityIds": [
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n02",
+      "kind": "method",
+      "x": 450,
+      "y": 617,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n03",
+      "kind": "problem",
+      "x": 580,
+      "y": 337,
+      "communityIds": [
+        "generation",
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n04",
+      "kind": "method",
+      "x": 630,
+      "y": 652,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n05",
+      "kind": "paper",
+      "x": 700,
+      "y": 337,
+      "communityIds": [
+        "vision",
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n06",
+      "kind": "problem",
+      "x": 880,
+      "y": 617,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n07",
+      "kind": "method",
+      "x": 730,
+      "y": 757,
+      "communityIds": [
+        "generation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n08",
+      "kind": "problem",
+      "x": 1080,
+      "y": 722,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "n09",
+      "kind": "method",
+      "x": 1160,
+      "y": 617,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": false
+    },
+    {
+      "id": "n10",
+      "kind": "problem",
+      "x": 360,
+      "y": 582,
+      "communityIds": [
+        "vision"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n11",
+      "kind": "method",
+      "x": 690,
+      "y": 267,
+      "communityIds": [
+        "generation",
+        "representation"
+      ],
+      "verified": true
+    },
+    {
+      "id": "n12",
+      "kind": "benchmark",
+      "x": 940,
+      "y": 652,
+      "communityIds": [
+        "identity"
+      ],
+      "verified": true
+    }
+  ],
+  "links": [
+    {
+      "id": "l01",
+      "source": "paper-report",
+      "target": "paper-survey",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l02",
+      "source": "paper-survey",
+      "target": "paper-attn",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l03",
+      "source": "paper-attn",
+      "target": "method-attn",
+      "relation": "proposes",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l04",
+      "source": "paper-base",
+      "target": "paper-survey",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l05",
+      "source": "paper-base",
+      "target": "dir-video-gen",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l06",
+      "source": "paper-follow",
+      "target": "paper-attn",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l07",
+      "source": "paper-follow",
+      "target": "dir-video-gen",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l08",
+      "source": "paper-eval",
+      "target": "bench-sim",
+      "relation": "evaluates",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l09",
+      "source": "paper-eval",
+      "target": "method-loss",
+      "relation": "proposes",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l10",
+      "source": "paper-limit",
+      "target": "method-loss",
+      "relation": "challenges",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l11",
+      "source": "dir-video-gen",
+      "target": "problem-consistency",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l12",
+      "source": "problem-consistency",
+      "target": "dir-consistency",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l13",
+      "source": "dir-consistency",
+      "target": "dir-multishot",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l14",
+      "source": "dir-multishot",
+      "target": "problem-identity",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l15",
+      "source": "paper-id-a",
+      "target": "dir-multishot",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l16",
+      "source": "paper-id-b",
+      "target": "paper-id-a",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l17",
+      "source": "paper-id-b",
+      "target": "problem-identity",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l18",
+      "source": "paper-temp",
+      "target": "dir-consistency",
+      "relation": "compares",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l19",
+      "source": "method-memory",
+      "target": "paper-neighbor",
+      "relation": "inspires",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l20",
+      "source": "paper-neighbor",
+      "target": "paper-id-a",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l21",
+      "source": "bench-id",
+      "target": "paper-id-b",
+      "relation": "evaluates",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l22",
+      "source": "paper-edge",
+      "target": "problem-open",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l23",
+      "source": "problem-open",
+      "target": "gap-long",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l24",
+      "source": "method-candidate",
+      "target": "gap-long",
+      "relation": "challenges",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l25",
+      "source": "idea-current",
+      "target": "dir-multishot",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l26",
+      "source": "n01",
+      "target": "paper-survey",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l27",
+      "source": "n02",
+      "target": "paper-eval",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l28",
+      "source": "n03",
+      "target": "method-attn",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l29",
+      "source": "n04",
+      "target": "method-loss",
+      "relation": "extends",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l30",
+      "source": "n05",
+      "target": "paper-id-a",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l31",
+      "source": "n06",
+      "target": "problem-identity",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l32",
+      "source": "n07",
+      "target": "paper-temp",
+      "relation": "supports",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l33",
+      "source": "n08",
+      "target": "problem-open",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l34",
+      "source": "n09",
+      "target": "gap-long",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l35",
+      "source": "n10",
+      "target": "paper-base",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l36",
+      "source": "n11",
+      "target": "paper-attn",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l37",
+      "source": "n12",
+      "target": "bench-id",
+      "relation": "compares",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l38",
+      "source": "paper-limit",
+      "target": "n02",
+      "relation": "challenges",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l39",
+      "source": "dir-video-gen",
+      "target": "paper-base",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l40",
+      "source": "method-attn",
+      "target": "dir-consistency",
+      "relation": "supports",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l41",
+      "source": "paper-id-a",
+      "target": "bench-id",
+      "relation": "evaluates",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l42",
+      "source": "paper-edge",
+      "target": "method-memory",
+      "relation": "cites",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l43",
+      "source": "n05",
+      "target": "dir-consistency",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l44",
+      "source": "n04",
+      "target": "problem-consistency",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l45",
+      "source": "n06",
+      "target": "paper-id-b",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l46",
+      "source": "n08",
+      "target": "method-candidate",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l47",
+      "source": "paper-neighbor",
+      "target": "method-memory",
+      "relation": "inspires",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l48",
+      "source": "n11",
+      "target": "n03",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l49",
+      "source": "n07",
+      "target": "bench-sim",
+      "relation": "evaluates",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l50",
+      "source": "n12",
+      "target": "idea-current",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l51",
+      "source": "paper-follow",
+      "target": "problem-consistency",
+      "relation": "studies",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l52",
+      "source": "paper-survey",
+      "target": "n10",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l53",
+      "source": "dir-multishot",
+      "target": "idea-current",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l54",
+      "source": "method-candidate",
+      "target": "paper-edge",
+      "relation": "extends",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l55",
+      "source": "n09",
+      "target": "n08",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l56",
+      "source": "beyond-q1",
+      "target": "gap-long",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l57",
+      "source": "beyond-q2",
+      "target": "beyond-q1",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l58",
+      "source": "beyond-q3",
+      "target": "n09",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l59",
+      "source": "paper-report",
+      "target": "n01",
+      "relation": "related",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l60",
+      "source": "method-loss",
+      "target": "dir-video-gen",
+      "relation": "supports",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l61",
+      "source": "paper-temp",
+      "target": "n07",
+      "relation": "proposes",
+      "evidenceRefs": [],
+      "isMock": true
+    },
+    {
+      "id": "l62",
+      "source": "bench-sim",
+      "target": "problem-consistency",
+      "relation": "evaluates",
+      "evidenceRefs": [],
+      "isMock": true
+    }
+  ],
+  "chapters": [
+    {
+      "id": "world",
+      "title": "前人的研究如何形成网络？",
+      "narration": "同一张图里看文献、问题和方向怎样连在一起。这是演示，不是已核实的学术结论。",
+      "camera": {
+        "focusX": 768,
+        "focusY": 512,
+        "scale": 1
+      },
+      "regionIds": [
+        "region-core",
+        "region-frontier",
+        "region-margin"
+      ]
+    },
+    {
+      "id": "literature",
+      "title": "论文、问题与方法怎样关联？",
+      "narration": "Literature Space 突出已经写在图里的论文、问题、方法和评价关系。",
+      "camera": {
+        "focusX": 620,
+        "focusY": 520,
+        "scale": 1.12
+      },
+      "focusNodeIds": [
+        "paper-attn",
+        "method-attn",
+        "problem-consistency"
+      ],
+      "regionIds": [
+        "region-core"
+      ]
+    },
+    {
+      "id": "explore",
+      "title": "从视频生成一致性走向一个方向",
+      "narration": "沿已有关系从视频生成走到跨镜头身份一致性。没选中的部分变淡。",
+      "camera": {
+        "focusX": 760,
+        "focusY": 500,
+        "scale": 1.55
+      },
+      "focusNodeIds": [
+        "dir-video-gen",
+        "dir-consistency",
+        "dir-multishot"
+      ],
+      "focusLinkIds": [
+        "l11",
+        "l12",
+        "l13"
+      ],
+      "routeIds": [
+        "explore"
+      ]
+    },
+    {
+      "id": "idea",
+      "title": "当前研究在知识世界的哪里？",
+      "narration": "黄色标记是当前 Idea 的位置。蓝色虚线只表示下一步倾向，还没有开始研究。",
+      "camera": {
+        "focusX": 910,
+        "focusY": 500,
+        "scale": 1.8
+      },
+      "focusNodeIds": [
+        "idea-current",
+        "dir-multishot"
+      ],
+      "showIdeaMarker": true
+    },
+    {
+      "id": "dive",
+      "title": "已有工作怎样一步步演进？",
+      "narration": "沿论文之间已配置的关系回看这条方向上的工作，不把相邻位置当成引用。",
+      "camera": {
+        "focusX": 800,
+        "focusY": 500,
+        "scale": 1.6
+      },
+      "focusNodeIds": [
+        "paper-id-b",
+        "paper-id-a",
+        "method-memory"
+      ],
+      "focusLinkIds": [
+        "l16",
+        "l15",
+        "l19"
+      ]
+    },
+    {
+      "id": "frontier",
+      "title": "这个方向上目前已知到哪里？",
+      "narration": "虚线只标出当前证据覆盖下的候选边界，不表示整个研究世界的尽头，也不证明没人研究过。",
+      "camera": {
+        "focusX": 1040,
+        "focusY": 520,
+        "scale": 1.45
+      },
+      "focusNodeIds": [
+        "gap-long",
+        "problem-open"
+      ],
+      "regionIds": [
+        "region-margin"
+      ],
+      "showFrontier": true
+    },
+    {
+      "id": "research",
+      "title": "哪些机制可能触及这个缺口？",
+      "narration": "候选方法尚未验证。它只说明可以怎样继续探索，不是已经取得的突破。",
+      "camera": {
+        "focusX": 1000,
+        "focusY": 520,
+        "scale": 1.5
+      },
+      "focusNodeIds": [
+        "gap-long",
+        "method-candidate",
+        "paper-neighbor"
+      ],
+      "showFrontier": true
+    },
+    {
+      "id": "evolution",
+      "title": "Idea 怎样随着证据演化？",
+      "narration": "下一步 Intent 停在这里，等研究者决定。演示不会自动改写核心构想。",
+      "camera": {
+        "focusX": 860,
+        "focusY": 510,
+        "scale": 1.08
+      },
+      "focusNodeIds": [
+        "idea-current",
+        "method-candidate"
+      ],
+      "showIdeaMarker": true
+    }
+  ]
+}
