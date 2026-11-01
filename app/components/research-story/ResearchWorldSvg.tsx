@@ -1,186 +1,113 @@
-import { exploreRoute, nodeById, world } from "../../../lib/research-world/story";
+import { useId } from "react";
+import { nodeAt, routeD, world } from "../../graph-svg/mock-world";
 
-const regionFill = {
-  core: "#DBEAF8",
-  frontier: "#EEE7F9",
-  margin: "#FFF3D8",
-} as const;
+const future = new Set(["gap", "candidate"]);
+const visibleNodes = world.nodes.filter((node) => !future.has(node.id));
+const visibleEdges = world.edges.filter((edge) => !future.has(edge.source) && !future.has(edge.target));
+const papers = visibleNodes.filter((node) => node.kind === "paper").filter((node, i) => node.id.startsWith("paper-") || i % 5 === 0);
 
-const beyondIds = new Set(["beyond-q1", "beyond-q2", "beyond-q3"]);
-const nodeKindLabel = {
-  paper: "论文",
-  problem: "研究问题",
-  method: "研究方法",
-  direction: "研究方向",
-  benchmark: "评价基准",
-  idea: "当前 Idea",
-  gap_candidate: "候选缺口",
-} as const;
-
+/** All layers stay mounted. Only the scene controller changes their presentation. */
 export function ResearchWorldSvg() {
-  const papers = world.nodes.filter((node) => node.kind === "paper");
-  const circles = world.nodes.filter((node) => node.kind !== "paper");
-  const route = exploreRoute.map((node) => `${node.x} ${node.y}`).join(" L ");
-  const idea = nodeById.get("idea-current");
-  const gap = nodeById.get("gap-long");
-  const candidate = nodeById.get("method-candidate");
-
+  const prefix = useId().replace(/:/g, "");
   return (
-    <svg
-      className="world-svg block aspect-[3/2] h-auto w-full lg:max-h-[540px]"
-      viewBox="0 0 1536 1024"
-      preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-labelledby="research-world-svg-title research-world-svg-desc"
-    >
-      <title id="research-world-svg-title">研究世界示意图</title>
-      <desc id="research-world-svg-desc">
-        演示用的文献知识图谱。核心区、研究前沿和边缘区域互相重叠。虚线边界只表示当前证据覆盖，不代表无人研究。
-      </desc>
+    <svg className="rw-svg" viewBox="0 0 1440 850" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby={`${prefix}-title ${prefix}-desc`}>
+      <title id={`${prefix}-title`}>同一张研究世界图谱中的文献关系、探索与候选方法</title>
+      <desc id={`${prefix}-desc`}>所有节点及关系均为演示数据。下方提供完整文字讲解；位置与密度不作为科学结论的依据。</desc>
       <defs>
-        <symbol id="paper-glyph" viewBox="0 0 28 36">
-          <rect width="28" height="36" rx="3" fill="#fff" stroke="#73849B" strokeWidth="1.4" />
-          <path d="M6 10h16M6 16h16M6 22h10" stroke="#C5D0DC" strokeWidth="1.3" />
-        </symbol>
-        <marker id="intent-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-          <path d="M0 0 L8 4 L0 8" fill="none" stroke="#3578C9" strokeWidth="1.2" />
-        </marker>
+        <radialGradient id={`${prefix}-wash`}>
+          <stop offset="0" stopColor="#e4eef5" stopOpacity=".45" />
+          <stop offset="1" stopColor="#e4eef5" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id={`${prefix}-glow`}>
+          <stop offset="0" stopColor="#efbf59" stopOpacity=".32" />
+          <stop offset="1" stopColor="#efbf59" stopOpacity="0" />
+        </radialGradient>
       </defs>
-
-      <g data-camera="">
-        <g data-layer="world-base">
-          <ellipse cx="768" cy="512" rx="620" ry="360" fill="#F7FAFC" stroke="#C5D0DC" strokeWidth="1.5" />
+      <g data-rw-camera="">
+        <g data-rw-layer="ring" className="rw-reveal">
+          <ellipse cx="712" cy="424" rx="645" ry="348" fill={`url(#${prefix}-wash)`} stroke="#b9cbd9" strokeWidth="1.2" />
+          <text x="712" y="64" textAnchor="middle" className="rw-world-label">Research World</text>
         </g>
-
-        <g data-layer="regions">
-          {world.regions.map((region) => (
-            <path
-              key={region.id}
-              id={region.id}
-              d={region.pathD}
-              fill={regionFill[region.kind]}
-              fillOpacity="0.28"
-            />
-          ))}
+        <g className="rw-regions">
+          <g data-rw-layer="core" className="rw-reveal">
+            <path d="M170 280 C235 190 445 195 561 280 C624 352 611 545 495 635 C320 694 175 595 160 440 Z" fill="#c3ddf0" fillOpacity=".32" />
+            <text x="342" y="248" textAnchor="middle" className="rw-region-label">核心区域</text>
+          </g>
+          <g data-rw-layer="frontier" className="rw-reveal">
+            <path d="M579 281 C708 215 908 211 1025 320 C1065 420 995 570 874 615 C704 647 600 563 571 425 Z" fill="#daceeb" fillOpacity=".30" />
+            <text x="798" y="254" textAnchor="middle" className="rw-region-label">研究前沿</text>
+          </g>
+          <g data-rw-layer="margin" className="rw-reveal">
+            <path d="M1003 277 C1128 223 1181 299 1196 422 C1204 526 1187 589 1097 637 C1027 605 982 480 1003 277 Z" fill="#f1dfa8" fillOpacity=".36" />
+            <text x="1114" y="250" textAnchor="middle" className="rw-region-label">边缘区域</text>
+          </g>
         </g>
-
-        <g data-layer="edges" stroke="#8A97A6" strokeWidth="1.25" fill="none" opacity="0.42">
-          {world.links.map((link) => {
-            const source = nodeById.get(link.source);
-            const target = nodeById.get(link.target);
-            if (!source || !target) return null;
-            return <line key={link.id} id={link.id} x1={source.x} y1={source.y} x2={target.x} y2={target.y} />;
+        <g data-rw-layer="base">
+          <g fill="none" stroke="#8999a7" strokeWidth="1.05" opacity=".38">
+            {visibleEdges.map((edge) => {
+              const a = nodeAt(edge.source), b = nodeAt(edge.target);
+              return <line key={`${edge.source}-${edge.target}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y} />;
+            })}
+          </g>
+          <g fill="#768696" stroke="#fff" strokeWidth=".65">
+            {visibleNodes.map((node) => <circle key={node.id} data-rw-node={node.id} cx={node.x} cy={node.y} r={node.radius}><title>研究节点（示意）</title></circle>)}
+          </g>
+        </g>
+        <g data-rw-layer="papers" className="rw-reveal">
+          {papers.map((node) => <g key={node.id} transform={`translate(${node.x - 9} ${node.y - 12})`}>
+            <rect width="18" height="24" rx="2" fill="#fff" stroke="#8599ae" strokeWidth="1.2" />
+            <path d="M4 7h10M4 12h10M4 17h7" stroke="#a5b7c8" fill="none" />
+          </g>)}
+        </g>
+        <g data-rw-layer="lineage" className="rw-reveal">
+          <path data-rw-draw="lineage" pathLength="1" d={routeD(world.routes.lineage)} className="rw-route" stroke="#4c85b2" />
+          {world.routes.lineage.map((id, i) => {
+            const n = nodeAt(id);
+            return <g key={id}><circle cx={n.x} cy={n.y} r="10" fill="#f4f9fd" stroke="#4c85b2" strokeWidth="2" /><text x={n.x} y={n.y + 42} textAnchor="middle" className="rw-node-label">{["基础工作 A", "方法改进 B", "比较工作 C", "邻近工作 D"][i]}</text></g>;
           })}
         </g>
-
-        <g data-layer="papers">
-          {papers.map((paper) => (
-            <use
-              key={paper.id}
-              id={paper.id}
-              href="#paper-glyph"
-              x={paper.x - 14}
-              y={paper.y - 18}
-              width="28"
-              height="36"
-            >
-              <title>论文节点（演示）</title>
-            </use>
-          ))}
+        <g data-rw-layer="boundary" className="rw-reveal">
+          <path d="M1160 280 C1135 390 1185 487 1195 620" fill="none" stroke="#9483b0" strokeWidth="2" strokeDasharray="8 8" />
+          <text x="1222" y="525" className="rw-node-label" fill="#7c6c96">局部研究边界</text>
+          <text x="1222" y="553" className="rw-small-label">基于当前证据</text>
+          <circle cx="1300" cy="444" r="8" fill="none" stroke="#b8a9ce" strokeDasharray="3 3" />
+          <circle cx="1281" cy="606" r="7" fill="none" stroke="#b8a9ce" strokeDasharray="3 3" />
         </g>
-
-        <g data-layer="nodes">
-          {circles.map((node) => {
-            const hub = node.kind === "direction";
-            const ideaNode = node.kind === "idea";
-            const gapNode = node.kind === "gap_candidate" || node.verified === false;
-            const beyond = beyondIds.has(node.id);
-            const radius = ideaNode ? 8 : hub ? 7.5 : 4.2;
-            return (
-              <circle
-                key={node.id}
-                id={node.id}
-                data-node={node.id}
-                cx={node.x}
-                cy={node.y}
-                r={radius}
-                fill={ideaNode ? "#E9AA29" : "#fff"}
-                stroke={gapNode && !ideaNode ? "#8D74B8" : ideaNode ? "#C48A16" : "#73849B"}
-                strokeWidth={ideaNode || hub ? 2 : 1.7}
-                strokeDasharray={gapNode && !ideaNode ? "3 2.5" : undefined}
-                opacity={beyond ? 0.45 : 1}
-              >
-                <title>{`${node.shortLabel ?? nodeKindLabel[node.kind]}${gapNode ? "（演示，尚未验证）" : "（演示节点）"}`}</title>
-              </circle>
-            );
+        <g data-rw-layer="explore" className="rw-reveal">
+          <path data-rw-draw="explore" pathLength="1" d={routeD(world.routes.explore)} className="rw-route" stroke="#4c85b2" />
+          {world.routes.explore.map((id, i) => {
+            const n = nodeAt(id);
+            return <g key={id} data-rw-stop={i}><circle cx={n.x} cy={n.y} r="9" fill="#edf5fb" stroke="#4c85b2" strokeWidth="2" /><text x={n.x} y={n.y - (i % 2 ? -42 : 28)} textAnchor="middle" className="rw-node-label">{n.label}</text></g>;
           })}
         </g>
-
-        <g data-layer="routes">
-          <path
-            data-route="explore"
-            d={`M ${route}`}
-            fill="none"
-            stroke="#3578C9"
-            strokeWidth="2.4"
-            opacity="0"
-          />
+        <g data-rw-layer="intent" className="rw-reveal">
+          <path d="M272 398 Q350 350 403 394 M391 384L403 394L389 398" fill="none" stroke="#4c85b2" strokeWidth="2" strokeDasharray="6 5" />
+          <path d="M270 409 Q337 464 393 488" fill="none" stroke="#8ca9c3" strokeWidth="1.5" strokeDasharray="5 5" />
+          <text x="320" y="348" className="rw-node-label">Intent · 下一步倾向</text>
         </g>
-
-        <g data-layer="frontier" fill="none" stroke="#8D74B8" strokeWidth="2" strokeDasharray="7 6">
-          <path d="M1080 240C1160 380 1100 560 1200 780" />
+        <g data-rw-layer="gap" className="rw-reveal">
+          <circle cx="1122" cy="352" r="26" fill="#fff8e9" stroke="#c49654" strokeWidth="2" strokeDasharray="6 5" />
+          <text x="1122" y="302" textAnchor="middle" className="rw-node-label">Gap Finder</text>
+          <text x="1122" y="409" textAnchor="middle" className="rw-small-label">候选缺口 · 待核实</text>
         </g>
-
-        <g data-layer="idea">
-          {idea && gap ? (
-            <line
-              data-intent="next"
-              x1={idea.x + 10}
-              y1={idea.y}
-              x2={gap.x - 12}
-              y2={gap.y}
-              stroke="#3578C9"
-              strokeWidth="1.8"
-              strokeDasharray="6 5"
-              markerEnd="url(#intent-arrow)"
-            />
-          ) : null}
+        <g data-rw-layer="transfer" className="rw-reveal">
+          <path data-rw-draw="transfer" pathLength="1" d="M526 660 C665 790 844 693 954 510 S1045 361 1122 352" className="rw-route" stroke="#598a80" />
+          <circle cx="526" cy="660" r="12" fill="#eff7f3" stroke="#598a80" strokeWidth="2" />
+          <text x="526" y="704" textAnchor="middle" className="rw-node-label">其他领域的机制</text>
+          <text x="831" y="671" className="rw-node-label" fill="#598a80">Innovator · 迁移候选</text>
         </g>
-
-        <g data-layer="labels" fill="#5C6B7A" fontSize="30" fontFamily="Albert Sans, PingFang SC, sans-serif" paintOrder="stroke" stroke="#FAFBFC" strokeWidth="6" strokeLinejoin="round">
-          <text x="470" y="230" textAnchor="middle">
-            核心区域
-          </text>
-          <text x="820" y="190" textAnchor="middle">
-            研究前沿
-          </text>
-          <text x="1160" y="230" textAnchor="middle">
-            边缘区域
-          </text>
-          <text x="1250" y="300" textAnchor="middle" fontSize="26">
-            研究边界
-          </text>
-          <text x="1250" y="334" textAnchor="middle" fontSize="20">
-            基于当前证据覆盖
-          </text>
-          <text x="1280" y="760" textAnchor="middle">
-            未知空间
-          </text>
-          {idea && (
-            <text x={idea.x} y={idea.y + 40} textAnchor="middle" fontSize="26" fill="#956710">
-              当前 Idea
-            </text>
-          )}
-          {gap && (
-            <text x={gap.x + 20} y={gap.y - 18} fontSize="24" fill="#785C9F">
-              候选缺口 · 未验证
-            </text>
-          )}
-          {candidate && (
-            <text x={candidate.x + 24} y={candidate.y + 33} fontSize="24" fill="#785C9F">
-              候选方法 · 未验证
-            </text>
-          )}
+        <g data-rw-layer="candidate" className="rw-reveal">
+          <path data-rw-draw="candidate" pathLength="1" d="M1122 352 Q1183 307 1254 313" className="rw-route" stroke="#c49654" />
+          <circle cx="1254" cy="313" r="18" fill="#fff7e4" stroke="#c49654" strokeWidth="2" strokeDasharray="5 4" />
+          <text x="1254" y="253" textAnchor="middle" className="rw-node-label">候选方法</text>
+          <text x="1254" y="374" textAnchor="middle" className="rw-small-label">审查与实验后才能判断</text>
+        </g>
+        <g data-rw-layer="idea" className="rw-reveal">
+          <g data-rw-marker="" transform="translate(250 395)">
+            <circle r="37" fill={`url(#${prefix}-glow)`} />
+            <circle r="18" fill="none" stroke="#e7b84c" strokeWidth="2.5" />
+            <circle r="9" fill="#e7b84c" stroke="#fff" strokeWidth="2" />
+          </g>
         </g>
       </g>
     </svg>

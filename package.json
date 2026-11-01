@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/test-research-story.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:story": "node scripts/test-research-story.mjs",
     "precompute-graph": "node scripts/precompute-graph.mjs"
   },
   "dependencies": {
