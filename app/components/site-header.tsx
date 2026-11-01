@@ -6,9 +6,6 @@ import { githubUrl, issuesUrl } from "../content";
 
 const links = [
   { href: "/#world", label: "Research World" },
-  { href: "/#workflow", label: "工作流" },
-  { href: "/#roles", label: "协作" },
-  { href: "/#community", label: "社区" },
   { href: "/docs", label: "文档" },
   { href: githubUrl, label: "GitHub" },
 ];
